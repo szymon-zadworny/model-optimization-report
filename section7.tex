@@ -1,2 +1,9 @@
 \section{Optymalizacja uczenia}
-TODO
+
+
+Jako że mamy do czynienia ze spektrogramami, augumentujemy nagrania przez:
+
+\begin{itemize}
+    \item Przesunięcie w poprzek, z zawinięciem. Moment rozpoczęcia muzyki nie powienien wpływać na gatunek.
+    \item Maskowanie spektrogramu na losowym paśmie częstotliwości - ma częściowo symulować nieoptymalne warunki nagraniowe, gdy niektóre częstotliwości są niewyraźne.
+\end{itemize}

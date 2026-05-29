@@ -1,2 +1,74 @@
 \section{Wybór danych i modelu}
-TODO
+
+\subsection{Model}
+Jako podstawę naszego modelu wybraliśmy musicNN (\url{https://github.com/jordipons/musicnn}), publicznie dostępny model splotowy. Wyjściem modelu jest uporządkowanie 50 cech, obejmujących styl oraz instrumenty.
+
+Tagi: guitar, classical, slow, techno, strings, drums, electronic, rock, fast, piano, ambient, beat, violin, vocal, synth, female, indian, opera, male, singing, vocals, no vocals, harpsichord, loud, quiet, flute, woman, male vocal, no vocal, pop, soft, sitar, solo, man, classic, choir, voice, new age, dance, male voice, female vocal, beats, harp, cello, no voice, weird, country, metal, female voice, choral.
+
+Wyjściem z modelu są cechy ważne w określaniu gatunku, ale inne gatunki niż te określane przez nasz model. Dodatkowo jego rozmiar jest mały, co pasuje dla naszego docelowego zastosowania, oraz potrzeby wielokrotnego treningu z różnymi nastawami. W związku z tym model został punktem wyjścia do optymalizacji.
+
+
+Wagi, na podstawie których chcemy transferować wiedzę, były wytrenowane na zbiorach MagnaTagATune. W repozytorium dostępne są również wagi wynikające z ćwiczenia na Million Song Dataset, z odpowiednimi tagami.
+
+
+
+Ponieważ model powienien przyjmować dane o różnej długości, wejściowe nagrania dzielone jest na 3-sekundowe segmenty, z których tworzone są melspektrogramy o rozmiarach 187x96. Na wejście modelu podawany jest logarytm z ich wartości (rys. \ref{fig:musicnn}). Wyjścia o rozmiarze 1x50 można zagregować dla całego utworu i uśrednić.
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{img/musicnn.png}
+    \caption{Struktura modelu musicnn}
+    \label{fig:musicnn}
+\end{figure}
+
+
+
+Przy trenowaniu modelu na dostępnym sprzęcie, uzyskana została nastepująca charakterystyka:
+\begin{table}[h]
+
+    \centering
+
+    \begin{tabular}{|l|c|}
+        \hline
+        \textbf{Parametr}               & \textbf{Wartość} \\
+        \hline
+        Liczba parametrów               & 785245           \\
+        Czas wnioskowania               & TODO             \\
+        Czas treningu pojedynczej epoki & TODO             \\
+        Wymagania pamięciowe            & TODO             \\
+
+        \hline
+    \end{tabular}
+
+    \caption{Porównanie modeli}
+    \label{tab:modele}
+
+\end{table}
+
+
+\subsection{Zbiór danych}
+Do wytrenowania wykorzystany został zbiór FMA (Free Music Archive) \url{https://github.com/mdeff/fma/tree/master} \cite{fma_dataset}
+
+Posiada on kilka podzbiorów, oraz hierarchiczną strukturę gatunkową, co pozwoliło nam na pobranie najmniejszej wersji zbioru i przetestowanie modelu przed podjęciem decyzji o ostatecznych wielkościach zbiorów. Zbiór zgadza się z założeniami projektowymi, a był wykorzystywany (według autorów) w ponad 100 artykułach naukowych.
+
+
+Inny zbiory danych wykorzystywane w muzyce to chociażby GTZAN, MagnaTagATune, Million Song Dataset.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|p{3cm}|p{3cm}|p{2.3cm}|p{6cm}|}
+        \hline
+        \textbf{Zbiór}             & \textbf{Liczba klas}           & \textbf{Liczba \ nagrań} & \textbf{Uwagi}                                                                           \\
+        \hline
+        FMA                        & 161 gatunków (hierarchicznych) & 106,574                  & Posiada 4 podzbiory: small (8 klas), medium (16 klas), large(161 klas), full (161 klas). \\
+        \hline
+        GTZAN                      & 10 gatunków                    & 1,000                    & 30-sekundowe nagrania                                                                    \\
+        \hline
+        MagnaTagATune              & 188 tagów                      & 25,863 clips             &                                                                                          \\
+        \hline
+        Million Song Dataset (MSD) & $\sim$45,000 tagów             & 1,000,000                &                                                                                          \\
+        \hline
+    \end{tabular}
+    \caption{Porównanie muzycznych zbiorów danych}
+\end{table}

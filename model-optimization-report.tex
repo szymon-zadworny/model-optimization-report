@@ -13,18 +13,27 @@
 \usepackage{scrextend}
 \usepackage{hyperref}
 
+\usepackage[
+    backend=biber,
+    style=numeric
+]{biblatex}
+
+\addbibresource{references.bib}
+
 \title{Optymalizacja sieci MusicNN}
 \author{Michał Wiliński, 188788 \and Szymon Zadworny, 188683}
 \date{}
 
 \begin{document}
-    \maketitle
-    \tableofcontents
-    \include{section1}
-    \include{section2}
-    \include{section3}
-    \include{section4}
-    \include{section5}
-    \include{section6}
-    \include{section7}
+\maketitle
+\tableofcontents
+\include{section1}
+\include{section2}
+\include{section3}
+\include{section4}
+\include{section5}
+\include{section6}
+\include{section7}
 \end{document}
+
+\printbibliography
