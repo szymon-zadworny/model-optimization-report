@@ -50,25 +50,34 @@ Przy trenowaniu modelu na dostępnym sprzęcie, uzyskana została nastepująca c
 \subsection{Zbiór danych}
 Do wytrenowania wykorzystany został zbiór FMA (Free Music Archive) \url{https://github.com/mdeff/fma/tree/master} \cite{fma_dataset}
 
-Posiada on kilka podzbiorów, oraz hierarchiczną strukturę gatunkową, co pozwoliło nam na pobranie najmniejszej wersji zbioru i przetestowanie modelu przed podjęciem decyzji o ostatecznych wielkościach zbiorów. Zbiór zgadza się z założeniami projektowymi, a był wykorzystywany (według autorów) w ponad 100 artykułach naukowych.
+Posiada on kilka podzbiorów, oraz hierarchiczną strukturę gatunkową, co pozwoliło nam na pobranie najmniejszej wersji zbioru i przetestowanie modelu przed podjęciem decyzji o ostatecznych wielkościach zbiorów. Zbiór zgadza się z założeniami projektowymi, zawiera nagrania mp3, a był wykorzystywany (według autorów) w ponad 100 artykułach naukowych.
 
 
-Inny zbiory danych wykorzystywane w muzyce to chociażby GTZAN, MagnaTagATune, Million Song Dataset.
+Inny zbiory danych wykorzystywane w muzyce to chociażby GTZAN, MagnaTagATune, Million Song Dataset, przedstawione w tabeli \ref{tab:datasets}.
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{|p{3cm}|p{3cm}|p{2.3cm}|p{6cm}|}
+    \begin{tabular}{|p{3cm}|p{3cm}|p{2.7cm}|p{6cm}|}
         \hline
-        \textbf{Zbiór}             & \textbf{Liczba klas}           & \textbf{Liczba \ nagrań} & \textbf{Uwagi}                                                                           \\
+        \textbf{Zbiór}                                        & \textbf{Liczba klas}         & \textbf{Liczba \ nagrań} & \textbf{Uwagi}                                                                                                                                       \\
         \hline
-        FMA                        & 161 gatunków (hierarchicznych) & 106,574                  & Posiada 4 podzbiory: small (8 klas), medium (16 klas), large(161 klas), full (161 klas). \\
+        FMA-small                                             & 8 gatunków (hierarchicznych) & 8000 (30s)               & Dla FMA gatunki są ustawione w hierarchię drzewiastą, od najbardziej ogólnych do szczególnych. Tutaj najbardziej ogólne gatunki. Zbiór zrównoważony. \\
         \hline
-        GTZAN                      & 10 gatunków                    & 1,000                    & 30-sekundowe nagrania                                                                    \\
+        FMA-medium                                            & 16 gatunków                  & 25000 (30s)              & Gatunki najbardziej ogólne. Zbiór niezrównoważony.                                                                                                   \\
         \hline
-        MagnaTagATune              & 188 tagów                      & 25,863 clips             &                                                                                          \\
+        FMA-large                                             & 161 gatunków                 & 106574 (30s)             & Zbiór niezrównoważony.                                                                                                                               \\
         \hline
-        Million Song Dataset (MSD) & $\sim$45,000 tagów             & 1,000,000                &                                                                                          \\
+        FMA-full                                              & 161 gatunków                 & 106574                   & Nieprzycięte nagrania. Zbiór niezrównoważony                                                                                                         \\
+        \hline
+
+        GTZAN \cite{tzanetakis2002}                           & 10 gatunków                  & 1000 (30s)               & 30-sekundowe nagrania                                                                                                                                \\
+        \hline
+        MagnaTagATune\cite{magnatagatune_dataset}             & 188 tagów                    & 25877 segmentów (30s)    & Do ewaluacji często używane 50 najczęstszych tagów \cite{ferraro2020}.
+        \\
+        \hline
+        Million Song Dataset (MSD)\cite{million_song_dataset} & $>$ 2000 tagów               & 1000000                  & Nie ma dostępnych nagrań, tylko cechy utwórów. Do ewaluacji często używane 50 najczęstszych tagów \cite{ferraro2020}.                                \\
         \hline
     \end{tabular}
     \caption{Porównanie muzycznych zbiorów danych}
+    \label{tab:datasets}
 \end{table}
